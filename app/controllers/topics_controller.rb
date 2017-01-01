@@ -4,15 +4,22 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
-  end
+    #@topics = Topic.all
+    @topics =Topic.all
+    #@topics.sort { |a| a[topic.votes.count] }
 
+  end
   # GET /topics/1
   # GET /topics/1.json
   def show
+    @topics = Topic.find(params[:id])
+
   end
 
-  # GET /topics/new
+
+  
+
+  # GET /topics/news
   def new
     @topic = Topic.new
   end
