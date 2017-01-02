@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
 
   # GET /topics
   # GET /topics.json
-  
+
   def index
     @topics =Topic.all
     if @topics.length != 0
@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
         end
       end
       max_num=topic_max.votes.count
-      opic_array << topic_max
+      topic_array << topic_max
       loop do
         @topics.each do |topic1|
           if topic1.votes.count==max_num && topic1.id != topic_array[0].id
