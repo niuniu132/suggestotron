@@ -3,11 +3,30 @@ class TopicsController < ApplicationController
 
   # GET /topics
   # GET /topics.json
+  
   def index
-    #@topics = Topic.all
     @topics =Topic.all
-    #@topics.sort { |a| a[topic.votes.count] }
-
+    if @topics.length != 0
+      topic_array=[]
+      topic_max=@topics.first
+      @topics.each do |topic|
+        if topic.votes.count>topic_max.votes.count
+          topic_max=topic
+        end
+      end
+      max_num=topic_max.votes.count
+      opic_array << topic_max
+      loop do
+        @topics.each do |topic1|
+          if topic1.votes.count==max_num && topic1.id != topic_array[0].id
+            topic_array << topic1
+          end
+        end
+        max_num = max_num-1
+        break if max_num==-1
+      end
+      @topics=topic_array
+     end
   end
   # GET /topics/1
   # GET /topics/1.json
@@ -17,7 +36,7 @@ class TopicsController < ApplicationController
   end
 
 
-  
+
 
   # GET /topics/news
   def new
